@@ -82,3 +82,16 @@ L server.py             : 백엔드, fastapi
         MODEL_ID=
         AWS_BEAREA_TOKEN_BEDROCK=
     ```
+
+# 구동
+- 백엔드 : server.py
+    ```
+        uvicorn server:app --reload --port 8000
+    ```
+    - 테스트
+        - http://127.0.0.1:8000/chat post 방식 요청
+
+- 프런트 : app.py
+    ```
+        streamlit run app.py
+    ```
