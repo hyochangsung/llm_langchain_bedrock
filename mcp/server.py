@@ -9,11 +9,48 @@ from datetime import datetime
 from mcp.server.fastmcp import FastMCP
 
 # 2. 로깅 설정
+#    출력값 섞이면 불편 => stderr 출력 조정
+logging.basicConfig(
+    level=logging.INFO,
+    format='[MCP Server] %(levelname)s: %(message)s',
+    stream=sys.stderr
+)
+logger = logging.getLogger(__name__)
 
 # 3. MCP 서버 설정
+mcp = FastMCP('6ToolsMCPServer')
+logger.info('MCPserver 구성 중..')
 
-# 4. 인메모리
+# 4. 인메모리 -> 메모/임시데이터를 저장할 tool 용도로 dict 형태로 저장관리용 -> 기본 구성x
+note_memory = dict()
 
 # 5. 툴 구현 (외부에 특정 리소스, s/w, 기타.. ), 편의상 간단한 기능 구성
+## Tool 1 : add (두 수를 더하기) -> 함수구성, 타입힌트 명시, 함수 주석
+def add(a: float, b: float) -> str:
+    '''
+    두 수를 더하는 계산기
+
+    Args:
+        a: 첫 번째 수치
+        b: 두 번째 수치
+    
+    Returns
+        계산 결과
+    '''
+    result = a + b
+    logger.info(f'Tool 1 add 호출: {a} + {b} = {result}')
+    return f'계산 결과: {a} + {b} = {result}'
+
+## Tool 2 : get_time 서버측 현재시간
+def get_time() -> str:
+    '''
+    서버측 현재 시간을 조회
+    
+    Returns
+        현재 시간 문자열
+    '''
+    cur_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    logger.info(f'Tool 2 get_time 호출: {cur_time}')
+    return f'현재 시간: {cur_time}'
 
 # 6. 서버 가동
