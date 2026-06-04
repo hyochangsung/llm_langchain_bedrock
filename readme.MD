@@ -42,10 +42,12 @@ L llm/__init__.py             : bedrock 통신 모듈
     ```
 - 활성화
     ```
-        # 윈도우
-        .\llm_venv\Scripts\activate
-        # 맥
-        source llm_venv\bin\activate
+    # 윈도우
+    .\llm_venv\Scripts\activate
+    # 맥
+    source llm_venv\bin\activate
+
+    pip install -r requirements.txt
     ```
 - .gitignore 내용 세팅
     - 가상환경 배제
@@ -210,3 +212,5 @@ L llm/__init__.py             : bedrock 통신 모듈
 사용자 -> 프럼프트 -> 랭체인/랭그래프 -> LLM 판단 -> 도구사용필요 -> 도구목록선택 -> 외부도구(MCP 요청, MCP Client) -> Adapter(파이썬->JSON-RPC 2.0) -> MCP Server -> 비즈니스 로직 -> 응답 -> (JSON-RPC 2.0->파이썬) -> MCP Client 응답 -> LLM 응답 -> 다음 노드(단계) 진행 -> ...
 => 성능 평가, 데이터 흐름, 트레킹, 관리 => 랭스미스
 ```
+
+## 1단계 폼 구성
