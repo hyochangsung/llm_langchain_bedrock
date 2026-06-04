@@ -99,9 +99,23 @@ def delete_note(note_id: str) -> str:
         note_id: 메모의 고유 ID, 키값
 
     Returns
-        현재 시간 문자열
+        삭제 완료 메세지
     '''
-    pass
+    # 방어코드
+    if not note_id: #내용 혹은 아이디가 누락되면
+        logger.warning('함수 파라미터 누락')
+        return "Fail: 필수 파라미터 누락"
+    
+    if note_id in note_memory:
+        # 삭제처리
+        del note_memory[note_id]
+        # 로깅
+        logger.info(f"delete_note 호출 : note_id={note_id}")
+        # 반환
+        return f"메모 삭제 완료! {note_id}"
+    else:
+        logger.info(f'delete_note 실패: note_id={note_id}로 구분되는 메모가 없음')
+        return f'메모 삭제 실패! {note_id}로 구분되는 메모가 없음'
 
 ## Tool 6 : rag_search 검색증강
 
